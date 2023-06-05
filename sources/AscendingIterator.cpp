@@ -4,13 +4,13 @@ using namespace ariel;
 MagicalContainer::AscendingIterator::AscendingIterator(MagicalContainer &container)
     : Iterator(container, Ascending, 0) {}
 
-MagicalContainer::AscendingIterator::AscendingIterator(MagicalContainer &container, size_t index)
+MagicalContainer::AscendingIterator::AscendingIterator(MagicalContainer &container, int index)
     : Iterator(container, Ascending, index) {}
 
 MagicalContainer::AscendingIterator::AscendingIterator(const MagicalContainer::AscendingIterator &other)
     : Iterator(other.getContainer(), Ascending, other.getIndex()) {}
 
-MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(AscendingIterator &other)
+MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(const AscendingIterator &other)
 {
     if (this->getType() != other.getType())
         throw runtime_error("Can't assign different iterators");

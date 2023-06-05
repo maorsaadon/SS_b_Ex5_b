@@ -3,16 +3,16 @@
 using namespace ariel;
 
 
-MagicalContainer::Iterator::Iterator(MagicalContainer &container, int type, size_t index) : _container(container), _type(type), _index(index){}
+MagicalContainer::Iterator::Iterator(MagicalContainer &container, int type, int index) : _container(container), _type(type), _index(index){}
 
 int MagicalContainer::Iterator::operator*() const
 {
     if (_index >= _container.size())
 		throw std::out_of_range("Iterator out of range");
-
-	return (_container._elements.at(_index)->getData());
+ 
+	return (_container.getElement(_index)->getData());
 }
-// Equality comparison(operator==)
+
 bool MagicalContainer::Iterator::operator==(const Iterator &other) const
 {
     if (this->_type != other._type)
@@ -23,12 +23,12 @@ bool MagicalContainer::Iterator::operator==(const Iterator &other) const
 
     return (this->_index == other._index);
 }
-// Inequality comparison(operator!=)
+
 bool MagicalContainer::Iterator::operator!=(const Iterator &other) const
 {
     return !(*this == other);
 }
-//  GT, LT comparison (operator>, operatorn<)
+
 bool MagicalContainer::Iterator::operator>(const Iterator &other) const
 {
     if (this->_type != other._type)
@@ -36,20 +36,6 @@ bool MagicalContainer::Iterator::operator>(const Iterator &other) const
 
     if (&this->_container != &other._container)
         throw runtime_error("Can't compare iterators from different containers");
-
-    // if (this->_index == 0 && other._index == 0)
-    //     return false;
-    
-    // if (this->_index == 0)
-    //     return true;
-
-    // if (other._index == 0)
-    //     return false;
-
-    // if (this->getContainer()._elements.at(_index)->getData() > other.getContainer()._elements.at(other._index)->getData())
-    //     return true;
-
-    // return false;
 
     return _index < other._index;
 }
@@ -61,17 +47,13 @@ bool MagicalContainer::Iterator::operator<(const Iterator &other) const
 
     if (&this->_container != &other._container)
         throw runtime_error("Can't compare iterators from different containers");
-    // if (this->_index == 0 && otherIt._index == 0)
-    //     return false;
-
-    // return !(*this > otherIt || *this == otherIt);
 
     return _index > other._index;
 
 }
 
 // getters
-size_t MagicalContainer::Iterator::getIndex() const
+int MagicalContainer::Iterator::getIndex() const
 {
     return this->_index;
 }
@@ -87,7 +69,7 @@ int MagicalContainer::Iterator::getType() const
 }
 
 // setters
-void MagicalContainer::Iterator::setIndex(size_t index)
+void MagicalContainer::Iterator::setIndex(int index)
 {
     this->_index = index;
 }

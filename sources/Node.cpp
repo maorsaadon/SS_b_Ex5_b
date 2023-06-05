@@ -2,8 +2,7 @@
 using namespace ariel;
 
 // constructor
-Node::Node(int data)
-    : _data(data), _nextPrime(nullptr), _prevPrime(nullptr)
+Node::Node(int data): _data(data), _nextPrime(-1), _prevPrime(-1)
 {
     this->_isPrime = this->checkIsPrime();
 }
@@ -27,11 +26,12 @@ int Node::getData()
     return this->_data;
 }
 
-Node* Node::getNextPrime()
+int Node::getNextPrime()
 {
     return this->_nextPrime;
 }
-Node* Node::getPrevPrime()
+
+int Node::getPrevPrime()
 {
     return this->_prevPrime;
 }
@@ -42,12 +42,12 @@ bool Node::getIsPrime()
 }
 
 // setters
-void Node::setNextPrime(Node* nextPrime)
+void Node::setNextPrime(int nextPrime)
 {
     this->_nextPrime = nextPrime;
 }
 
-void Node::setPrevPrime(Node* prevPrime)
+void Node::setPrevPrime(int prevPrime)
 {
     this->_prevPrime = prevPrime;
 }
