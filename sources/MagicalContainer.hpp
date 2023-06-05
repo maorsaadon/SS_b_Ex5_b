@@ -20,7 +20,6 @@ namespace ariel
         int getPrevPrimeVector(int index);
         void addNumber(Node *newNode);
         void insertToNumbers(int next, Node *newNode);
-        void removeFromPrimes(Node *deletedNode);
         void removeFromNumbers(Node *deletedNode);
 
     public:
@@ -39,13 +38,6 @@ namespace ariel
         size_t size();
         void addElement(int number);
         void removeElement(int number);
-
-        void printElements(){
-            
-            cout << "firstPrime: " << _firstPrime << " lastPrime: " << _lastPrime << endl;
-            for(auto element : _elements)
-                cout << "number: " << element->getData() << " prime: " << element->getIsPrime() << " nextPrime: " << element->getNextPrime() << " prevPrime: " << element->getPrevPrime() << endl;
-        }
 
         ~MagicalContainer();
         MagicalContainer(const MagicalContainer &other);
@@ -73,7 +65,7 @@ namespace ariel
         MagicalContainer &getContainer() const;
         int getType() const;
 
-        void setIndex(int index);
+        void setIndex(int index) ;
 
         virtual ~Iterator() = default;
         Iterator(const Iterator &other);

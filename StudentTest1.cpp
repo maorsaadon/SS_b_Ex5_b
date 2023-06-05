@@ -318,6 +318,7 @@ TEST_CASE("Comparing PrimeIterator") {
         MagicalContainer::PrimeIterator it2(container);
 
         CHECK((it1 == it2));
+        
         CHECK_FALSE((it1 != it2));
         CHECK_FALSE((it1 > it2));
         CHECK_FALSE((it1 < it2));
@@ -334,12 +335,13 @@ TEST_CASE("Comparing PrimeIterator") {
         CHECK_FALSE((it1 > it2));
         CHECK_FALSE((it1 < it2));
 
+        
         ++it1;
         CHECK_FALSE((it1 == it2));
         CHECK((it1 != it2));
         CHECK((it1 > it2));
         CHECK_FALSE((it1 < it2));
-
+        
         ++it2;
         CHECK((it1 == it2));
         CHECK_FALSE((it1 != it2));

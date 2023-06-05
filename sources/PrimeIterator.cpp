@@ -3,7 +3,10 @@ using namespace ariel;
 
 MagicalContainer::PrimeIterator::PrimeIterator(MagicalContainer &container, int index) : Iterator(container, Prime, index){}
 
-MagicalContainer::PrimeIterator::PrimeIterator(MagicalContainer &container) : Iterator(container, Prime, container.getFirstPrime()){}
+MagicalContainer::PrimeIterator::PrimeIterator(MagicalContainer &container) : Iterator(container, Prime, container._firstPrime){
+    if(container.size() == 0) setIndex(container.size());
+    if(container._firstPrime == -1 && container._lastPrime == -1) setIndex(container.size());
+}
 
 MagicalContainer::PrimeIterator::PrimeIterator(MagicalContainer::PrimeIterator const &other)
     : Iterator(other.getContainer(), Prime, other.getIndex()) {}
@@ -30,6 +33,7 @@ MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator=(Prim
 
     return *this;
 }
+
 
 MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator++()
 {

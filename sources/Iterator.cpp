@@ -2,15 +2,14 @@
 
 using namespace ariel;
 
-
-MagicalContainer::Iterator::Iterator(MagicalContainer &container, int type, int index) : _container(container), _type(type), _index(index){}
+MagicalContainer::Iterator::Iterator(MagicalContainer &container, int type, int index) : _container(container), _type(type), _index(index) {}
 
 int MagicalContainer::Iterator::operator*() const
 {
-    if (_index >= _container.size())
-		throw std::out_of_range("Iterator out of range");
- 
-	return (_container.getElement(_index)->getData());
+    if (_index >= _container.size() || _index < 0)
+        throw std::out_of_range("Iterator out of range");
+
+    return (_container.getElement(_index)->getData());
 }
 
 bool MagicalContainer::Iterator::operator==(const Iterator &other) const
@@ -37,7 +36,17 @@ bool MagicalContainer::Iterator::operator>(const Iterator &other) const
     if (&this->_container != &other._container)
         throw runtime_error("Can't compare iterators from different containers");
 
-    return _index < other._index;
+    if (this->getContainer().getElement(_index) == nullptr && other.getContainer().getElement(other._index) == nullptr)
+        return false;
+
+    if(this->getContainer().getElement(_index) == nullptr) return true;
+
+    if(other.getContainer().getElement(_index) == nullptr) return false;
+
+    if (this->getContainer().getElement(_index)->getData() > other.getContainer().getElement(other._index)->getData())
+        return true;
+
+    return false;
 }
 bool MagicalContainer::Iterator::operator<(const Iterator &other) const
 {
@@ -48,8 +57,7 @@ bool MagicalContainer::Iterator::operator<(const Iterator &other) const
     if (&this->_container != &other._container)
         throw runtime_error("Can't compare iterators from different containers");
 
-    return _index > other._index;
-
+   return !(*this > other || *this == other);
 }
 
 // getters
@@ -77,7 +85,7 @@ void MagicalContainer::Iterator::setIndex(int index)
 // 5 related nethods
 MagicalContainer::Iterator::Iterator(const Iterator &other) : _container(other._container), _type(other._type), _index(other._index) {}
 MagicalContainer::Iterator::Iterator(Iterator &&other) noexcept : _container(other._container), _type(other._type), _index(other._index) {}
-    
+
 MagicalContainer::Iterator &MagicalContainer::Iterator::operator=(const Iterator &other)
 {
     if (this->_type != other._type)
