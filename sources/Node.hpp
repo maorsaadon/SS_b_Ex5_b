@@ -1,7 +1,12 @@
 #pragma once
 #include <iostream>
+#include <numeric>
+#include <limits>
+
+constexpr size_t maxValue = std::numeric_limits<size_t>::max();
 
 using namespace std;
+
 
 namespace ariel
 {
@@ -9,26 +14,26 @@ namespace ariel
     {
     private:
         int _data;
-        int _nextPrime;
-        int _prevPrime;
+        size_t _nextPrime;
+        size_t _prevPrime;
         bool _isPrime;
 
         // helper functions
-        bool checkIsPrime();
+        bool isPrime();
 
     public:
         // constructors
         Node(int data);
 
         // getters
-        int getData();
-        int getNextPrime();
-        int getPrevPrime();
-        bool getIsPrime();
+        int getData() const;
+        size_t getNextPrime() const;
+        size_t getPrevPrime() const;
+        bool getIsPrime() const;
 
         // setters
-        void setNextPrime(int nextPrime);
-        void setPrevPrime(int prevPrime);
+        void setNextPrime(size_t nextPrime);
+        void setPrevPrime(size_t prevPrime);
 
         bool operator==(const Node &other);
     };

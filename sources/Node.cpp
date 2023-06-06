@@ -2,13 +2,13 @@
 using namespace ariel;
 
 // constructor
-Node::Node(int data): _data(data), _nextPrime(-1), _prevPrime(-1)
+Node::Node(int data): _data(data), _nextPrime(maxValue), _prevPrime(maxValue)
 {
-    this->_isPrime = this->checkIsPrime();
+    this->_isPrime = this->isPrime();
 }
 
 // helper function
-bool Node::checkIsPrime()
+bool Node::isPrime()
 {
     if (this->_data < 2)
         return false;
@@ -21,33 +21,33 @@ bool Node::checkIsPrime()
 }
 
 // getters
-int Node::getData()
+int Node::getData() const
 {
     return this->_data;
 }
 
-int Node::getNextPrime()
+size_t Node::getNextPrime() const
 {
     return this->_nextPrime;
 }
 
-int Node::getPrevPrime()
+size_t Node::getPrevPrime() const
 {
     return this->_prevPrime;
 }
 
-bool Node::getIsPrime()
+bool Node::getIsPrime() const
 {
     return this->_isPrime;
 }
 
 // setters
-void Node::setNextPrime(int nextPrime)
+void Node::setNextPrime(size_t nextPrime)
 {
     this->_nextPrime = nextPrime;
 }
 
-void Node::setPrevPrime(int prevPrime)
+void Node::setPrevPrime(size_t prevPrime)
 {
     this->_prevPrime = prevPrime;
 }
