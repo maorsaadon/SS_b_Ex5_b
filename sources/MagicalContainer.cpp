@@ -79,6 +79,7 @@ void MagicalContainer::updatePrimes()
 void MagicalContainer::addElement(int data)
 {
     Node *newNode = new Node(data);
+    //https://www.geeksforgeeks.org/lower_bound-in-cpp/
     auto it = lower_bound(_elements.begin(), _elements.end(), newNode, [](const Node *a, const Node *b)
                           { return a->getData() < b->getData(); });
 
