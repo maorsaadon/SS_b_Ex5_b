@@ -1,18 +1,23 @@
 #include "MagicalContainer.hpp"
 using namespace ariel;
 
+// SideCrossIterator constructor with index
 MagicalContainer::SideCrossIterator::SideCrossIterator(MagicalContainer &container, size_t index)
     : Iterator(container, SideCross, index), _first(0), _last(0), _direct(true) {}
 
+// SideCrossIterator constructor with index and counter
 MagicalContainer::SideCrossIterator::SideCrossIterator(MagicalContainer &container, size_t index, size_t counter)
     : Iterator(container, SideCross, index, counter), _first(0), _last(0), _direct(true) {}
 
+// SideCrossIterator default constructor
 MagicalContainer::SideCrossIterator::SideCrossIterator(MagicalContainer &container)
     : Iterator(container, SideCross, 0), _first(0), _last(0), _direct(true) {}
 
+// SideCrossIterator copy constructor
 MagicalContainer::SideCrossIterator::SideCrossIterator(MagicalContainer::SideCrossIterator const &other)
     : Iterator(other._container, SideCross, other._index, other._counter), _first(other._first), _last(other._last), _direct(other._direct) {}
 
+// SideCrossIterator copy assignment operator
 MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operator=(const SideCrossIterator &other)
 {
     if (this == &other)
@@ -21,7 +26,6 @@ MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operat
     if (this->_type != other._type)
         throw runtime_error("Can't assign different iterators");
 
-   
     if (&this->_container != &other._container)
         throw runtime_error("Can't assign iterators from different containers");
 
@@ -34,6 +38,7 @@ MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operat
     return *this;
 }
 
+// SideCrossIterator move assignment operator
 MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operator=(SideCrossIterator &&other) noexcept
 {
     if (&this->_container == &other._container)
@@ -48,9 +53,9 @@ MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operat
     return *this;
 }
 
+// Dereference operator
 int MagicalContainer::SideCrossIterator::operator*() const
 {
-
     if (_counter >= _container.size())
     {
         throw runtime_error("Can't use dereference operator for nullptr operator");
@@ -61,9 +66,9 @@ int MagicalContainer::SideCrossIterator::operator*() const
         return _container.getElement(_container.size() - _last-1)->getData();
 }
 
+// Pre-increment operator
 MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operator++()
 {
-
     if (_counter >= _container.size())
         throw runtime_error("out of range");
 
@@ -72,7 +77,6 @@ MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operat
         _first++;
         _direct = false;
     }
-
     else
     {
         _last++;
@@ -84,11 +88,13 @@ MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operat
     return *this;
 }
 
+// SideCrossIterator begin function
 MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::begin() const
 {
     return SideCrossIterator(this->_container);
 }
 
+// SideCrossIterator end function
 MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::end() const
 {
     return SideCrossIterator(this->_container, this->_container.size(), this->_container.size());
