@@ -26,7 +26,6 @@ MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operat
         throw runtime_error("Can't assign iterators from different containers");
 
     this->_index = other._index;
-    this->_counter = other._counter;
 
     return *this;
 }
@@ -37,10 +36,9 @@ MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operat
     if (this == &other)
         return *this;
 
-    if (&this->_container == &other._container){
+    if (&this->_container == &other._container)
         this->_index = other._index;
-        this->_counter = other._counter;
-    }
+    
 
     return *this;
 }
@@ -52,7 +50,6 @@ MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operat
         throw std::runtime_error("Iterator out of range");
 
     this->_index++;
-    this->_counter++;
     return *this;
 }
 

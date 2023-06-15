@@ -28,7 +28,7 @@ MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator=(cons
     if (&this->_container != &other._container)
         throw runtime_error("Can't assign iterators from different containers");
 
-    this->_counter = other._counter;
+    
     this->_index = other._index;
     
     return *this;
@@ -40,10 +40,10 @@ MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator=(Prim
     if (this == &other)
         return *this;
 
-    if (&this->_container == &other._container){
+    if (&this->_container == &other._container)
         this->_index = other._index;
-        this->_counter = other._counter;
-    }
+        
+    
         
     return *this;
 }
